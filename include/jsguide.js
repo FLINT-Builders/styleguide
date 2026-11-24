@@ -56,8 +56,14 @@ window.initStyleGuide = function(init) {
   init();
 
   // Call the pretty-printer after we've fixed up the code blocks.
+  var prettyStyle = document.createElement('link');
+  prettyStyle.rel = 'stylesheet';
+  prettyStyle.href = 'include/prettify.css';
+  document.head.appendChild(prettyStyle);
   var pretty = document.createElement('script');
-  pretty.src = 'https://cdn.jsdelivr.net/gh/google/code-prettify@master/' +
-      'loader/run_prettify.js';
+  pretty.onload = function() {
+    window.PR.prettyPrint();
+  };
+  pretty.src = 'include/prettify.js';
   document.body.appendChild(pretty);
 }.bind(null, window.initStyleGuide);
